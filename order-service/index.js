@@ -1,8 +1,6 @@
-
 const express = require('express');
 require('./db')
 const orderService = require('./routes/order');
-
 const Order = require('./module/order');
 const { authentication } = require('./authentication');
 
@@ -14,7 +12,7 @@ app.use(express.json());
 app.post('/orders', authentication, async (req, res) => {
   const { userId, items } = req.body;
   if (!userId || !Array.isArray(items) || items.length === 0) {
-    return res.status(400).json({ error: 'UserId and items are required' });
+    return res.status(400).json({ error: 'userid and items are required' });
   }
 
   try {
@@ -22,7 +20,7 @@ app.post('/orders', authentication, async (req, res) => {
     const newOrder = await orderService.createOrder(userId, items);
     res.status(201).json(newOrder);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create order', details: error.message });
+    res.status(500).json({ error: 'failed to create ', details: error.message });
   }
 });
 
@@ -42,13 +40,13 @@ app.get('/orders/:id', authentication, async (req, res) => {
     if (order) {
       res.json(order);
     } else {
-      res.status(404).json({ message: 'Order not found' });
+      res.status(404).json({ message: 'order not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch order', details: error.message });
+    res.status(500).json({ error: 'failed to fetch order', details: error.message });
   }
 });
 
 app.listen(port, () => {
-  console.log(`OrderService listening on port ${port}`);
+  console.log(`orderservice listening on port ${port}`);
 });
