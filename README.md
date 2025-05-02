@@ -1,7 +1,7 @@
 Node.js Microservices with AES-256 Authentication
 
 This repository contains three Node.js microservices:
-
+- **authService**
 - **OrderService**
 - **ProductService**
 - **ChatService**
